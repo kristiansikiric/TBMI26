@@ -12,7 +12,7 @@ dataSetNr = 1; % Change this to load new data
 [X, D, L] = loadDataSet( dataSetNr );
 
 % You can plot and study dataset 1 to 3 by running:
-% plotCase(X,D)
+%plotCase(X,D)
 
 %% Select a subset of the training features
 
@@ -37,10 +37,10 @@ LkNN = kNN(Xt{2}, k, Xt{1}, Lt{1});
 % Note: you have to modify the calcConfusionMatrix() function yourselfs.
 
 % The confucionMatrix
-cM = calcConfusionMatrix( LkNN, Lt{2})
+cM = calcConfusionMatrix( LkNN, Lt{2});
 
 % The accuracy
-acc = calcAccuracy(cM)
+acc = calcAccuracy(cM);
 
 %% Plot classifications
 % Note: You do not need to change this code.
