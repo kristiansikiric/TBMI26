@@ -5,7 +5,12 @@ cM = zeros(numClasses);
 
 % Add your own code here
 
-cM = confusionmat(Ltrue,Lclass);
+for i = 1:numClasses
+    ind = Ltrue == i; %extract true class
+    for j = 1:numClasses
+        cM(i,j)=sum(Lclass(ind) == j); 
+    end
+end
 
 
 end

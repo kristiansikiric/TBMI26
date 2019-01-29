@@ -1,4 +1,4 @@
-function [ labelsOut ] = kNN(X, k, Xt, Lt)
+function [ acc ] = kNN(X, k, Xt, Lt)
 %KNN Your implementation of the kNN algorithm
 %   Inputs:
 %               X  - Features to be classified
@@ -21,10 +21,19 @@ numClasses = length(classes);
 D = pdist2(X',Xt','euclidean');
 %sort rows of D in ascending order. nearest describes where in D the sorted values are? 
 [~,nearest] = sort(D,2,'ascend');
-
 labelsOut = mode(Lt(nearest(:,1:k)),2);
 
+cM = calcConfusionMatrix(labelsOut,Lt);
+accuracy(1) = calcAccuracy(cM);
 
+D = pdist2(Xt',X','euclidean');
+%sort rows of D in ascending order. nearest describes where in D the sorted values are? 
+[~,nearest] = sort(D,2,'ascend');
+labelsOut = mode(Lt(nearest(:,1:k)),2);
 
+cM = calcConfusionMatrix(labelsOut,Lt);
+accuracy(2) = calcAccuracy(cM);
+
+acc = mean(accuracy);
 end
 

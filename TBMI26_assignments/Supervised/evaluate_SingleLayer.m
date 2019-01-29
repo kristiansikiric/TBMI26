@@ -2,8 +2,6 @@
 
 %% Select which data to use:
 
-%% Select which data to use:
-
 % 1 = dot cloud 1
 % 2 = dot cloud 2
 % 3 = dot cloud 3
