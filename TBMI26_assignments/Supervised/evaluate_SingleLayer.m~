@@ -35,9 +35,8 @@ Xtest = [Xt{2}; ones(1,numSamplesPerLabelPerBin * 2)];
 
 numIterations = 40000; % Change this, Numner of iterations (Epochs)
 learningRate = 0.00005; % Change this, Your learningrate
-feats = size(Xtraining);
-feats = feats(1);
-W0 = (0.1*randn(feats,max(L)))'; % Change this, Initiate your weight matrix W
+cols = siz
+W0 = 0; % Change this, Initiate your weight matrix W
 
 [W, trainingError, testError ] = trainSingleLayer(Xtraining,Dt{1},Xtest,Dt{2}, W0,numIterations, learningRate );
 

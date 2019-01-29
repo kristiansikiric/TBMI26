@@ -30,7 +30,7 @@ for n = 1:numIterations
     Y = Wout*Xt;
     
     
-    grad_w = 0;
+    grad_w = -2(Y - Dt)*tanhprim(Dt)
     
     
     Wout = Wout - learningRate*grad_w;
