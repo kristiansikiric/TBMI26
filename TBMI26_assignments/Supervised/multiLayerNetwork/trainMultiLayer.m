@@ -36,8 +36,8 @@ for n = 1:numIterations
     U = [ones(1,length(U)); U];
     Uprim = tanhprim(U);
 
-    grad_v = -2*(Dtraining-Ytraining)*U'; %Calculate the gradient for the output layer
-    grad_w = -2*Vout(:,2:end)'*(Dtraining-Ytraining).*Uprim(2:end,:)*Xtraining'; %..and for the hidden layer.
+    grad_v = -2/numTraining*(Dtraining-Ytraining)*U'; %Calculate the gradient for the output layer
+    grad_w = -2/numTraining*(Vout(:,2:end)'*(Dtraining-Ytraining).*Uprim(2:end,:)*Xtraining'); %..and for the hidden layer.
 
     Wout = Wout - learningRate * grad_w; %Take the learning step.
     Vout = Vout - learningRate * grad_v; %Take the learning step.
