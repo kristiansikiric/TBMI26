@@ -29,7 +29,7 @@ selectAtRandom = true; % true = select features at random, false = select the fi
 % Note: you have to modify the kNN() function yourselfs.
 
 % Set the number of neighbors
-k = 3;
+k = 1;
 
 LkNN = kNN(Xt{2}, k, Xt{1}, Lt{1});
 

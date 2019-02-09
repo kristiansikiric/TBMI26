@@ -7,7 +7,7 @@
 % 3 = dot cloud 3
 % 4 = OCR data
 
-dataSetNr = 1; % Change this to load new data 
+dataSetNr = 4; % Change this to load new data 
 
 [X, D, L] = loadDataSet( dataSetNr );
 
@@ -25,10 +25,9 @@ selectAtRandom = true; % true = select features at random, false = select the fi
 
 
 % The Training Data
-Xtraining = [ones(1,numSamplesPerLabelPerBin * 2); Xt{1}];
-
+Xtraining = [ones(1,length(Xt{1})); Xt{1}];
 % The Test Data
-Xtest = [ones(1,numSamplesPerLabelPerBin * 2); Xt{2}];
+Xtest = [ones(1,length(Xt{2})); Xt{2}];
 
 
 %% Train your single layer network
@@ -41,7 +40,7 @@ learningRate = 0.001; % Change this, Your learningrate
 numFeats = size(Xtraining, 1);
 numLabels = size(unique(L),1);
 W0 = 0.1 * randn(numHidden,numFeats); % Change this, Initiate your weight matrix W
-V0 = 0.1 * randn(numLabels,numHidden); % Change this, Initiate your weight matrix V
+V0 = 0.1 * randn(numLabels,numHidden+1); % Change this, Initiate your weight matrix V
 
 %
 tic

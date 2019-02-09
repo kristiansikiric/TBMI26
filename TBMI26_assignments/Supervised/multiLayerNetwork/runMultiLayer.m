@@ -11,7 +11,8 @@ function [ Y, L ] = runMultiLayer( X, W, V )
 
 S = W * X; %Calculate the sumation of the weights and the input signals (hidden neuron)
 U = tanh(S); %Calculate the activation function as a hyperbolic tangent
-Y = U * V; %Calculate the sumation of the output neuron
+U = [ones(1,length(U)); U];
+Y = V*U; %Calculate the sumation of the output neuron
    
 
 % Calculate classified labels

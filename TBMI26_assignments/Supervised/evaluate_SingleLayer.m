@@ -14,7 +14,7 @@ dataSetNr = 1; % Change this to load new data
 %% Select a subset of the training features
 
 numBins = 2; % Number of Bins you want to devide your data into
-numSamplesPerLabelPerBin = 100; % Number of samples per label per bin, set to inf for max number (total number is numLabels*numSamplesPerBin)
+numSamplesPerLabelPerBin = inf; % Number of samples per label per bin, set to inf for max number (total number is numLabels*numSamplesPerBin)
 selectAtRandom = true; % true = select features at random, false = select the first features
 
 [ Xt, Dt, Lt ] = selectTrainingSamples(X, D, L, numSamplesPerLabelPerBin, numBins, selectAtRandom );
@@ -24,10 +24,10 @@ selectAtRandom = true; % true = select features at random, false = select the fi
 %% Modify the X Matrices so that a bias is added
 
 % The Training Data
-Xtraining = [ones(1,numSamplesPerLabelPerBin * 2); Xt{1}];
+Xtraining = [ones(1,length(Xt{1})); Xt{1}];
 
 % The Test Data
-Xtest = [ones(1,numSamplesPerLabelPerBin * 2); Xt{2}];
+Xtest = [ones(1,length(Xt{2})); Xt{2}];
 
 
 %% Train your single layer network
