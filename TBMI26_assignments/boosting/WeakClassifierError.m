@@ -8,6 +8,7 @@ function E = WeakClassifierError(C, D, Y)
 % You are not allowed to use a loop in this function.
 % This is for your own benefit, since a loop will be too slow to use
 % with a reasonable amount of Haar features and training images.
-    
+%E = sum(D(:,1)*(Y(:,1)~=C(:,1)));
+E = sum(D.*(Y~=C'));
 end
 

@@ -21,7 +21,7 @@ for k=1:25
 end
 
 % Generate Haar feature masks
-nbrHaarFeatures = ???;
+nbrHaarFeatures = 25;
 haarFeatureMasks = GenerateHaarFeatureMasks(nbrHaarFeatures);
 
 figure(3);
@@ -34,19 +34,34 @@ end
 
 % Create a training data set with a number of training data examples
 % from each class. Non-faces = class label y=-1, faces = class label y=1
-nbrTrainExamples = ???;
+nbrTrainExamples = 1000;
 trainImages = cat(3,faces(:,:,1:nbrTrainExamples),nonfaces(:,:,1:nbrTrainExamples));
 xTrain = ExtractHaarFeatures(trainImages,haarFeatureMasks);
 yTrain = [ones(1,nbrTrainExamples), -ones(1,nbrTrainExamples)];
 
 %% Implement the AdaBoost training here
 %  Use your implementation of WeakClassifier and WeakClassifierError
-
+T = 0;
+P = 1;
+D = ones(1,size(xTrain,2))*1/size(xTrain,2);
+H = zeros(1,size(xTrain,2));
+for x = xTrain.'
+    C = WeakClassifier(T,P,x);
+    E = WeakClassifierError(C,D,yTrain);
+    if E > 0.5
+        P = P*-1;
+        E = 1-E;
+    end
+    alpha = 0.5*log((1-E)/E);
+    D = D.*exp(-alpha*yTrain.*C');
+    D = D/sum(D);
+    H = sign(H + alpha*C');
+end
 
 
 %% Extract test data
 
-nbrTestExamples = ???;
+nbrTestExamples =10;
 
 testImages  = cat(3,faces(:,:,(nbrTrainExamples+1):(nbrTrainExamples+nbrTestExamples)),...
                     nonfaces(:,:,(nbrTrainExamples+1):(nbrTrainExamples+nbrTestExamples)));
