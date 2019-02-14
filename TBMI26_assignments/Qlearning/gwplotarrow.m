@@ -1,13 +1,14 @@
 function gwplotarrow(position, action)
-% gwplotarrow(position, action)
+% GWPLOTARROW(position, action)
 %
 % Plots an arrow at position given the action. Same encoding of
 % actions as in gwaction. Useful for plotting the behaviour of an
-% optimal policy given a Q-function.
-  
+% optimal policy given a Q-function. Giving the Q-function as an input to
+% gwdraw will do this automatically in all states.
+
 hold on;
 if action == 0
-    scatter(position(1),position(2),5,'b','filled');
+    scatter(position(2),position(1),5,'b','filled');
 else
     hold on;
     if action == 1
@@ -23,8 +24,9 @@ else
       symb = 'r<';
       next_position = [position(1) position(2)]' + 0.5*[0 -1]';
     end
-    plot([position(2),next_position(2)], [position(1),next_position(1)],'r');
-    plot([next_position(2)], [next_position(1)],symb);
+   plot([position(2),next_position(2)], [position(1),next_position(1)],'r');
+   plot([next_position(2)], [next_position(1)], symb);
+
     %        scatter(next_position(1),next_position(2),5,'r', 'filled');
 end
 

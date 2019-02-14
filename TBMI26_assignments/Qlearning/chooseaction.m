@@ -1,7 +1,7 @@
-function [action, opt_action] = chooseaction(Q, state_x, state_y, ...
-                                              actions, prob_a, eps)
+function [action, opt_action] = chooseaction(Q, state_y, state_x, ...
+                                             actions, prob_a, eps)
 % CHOOSEACTION chooses an action from the vector of actions, based on the Q
-% matrix and the current position [state_x, state_y]. The optimal action is
+% matrix and the current position [state_y, state_x]. The optimal action is
 % chosen with probability (1-eps), otherwise a random action is chosen,
 % with a probability for each action according to prob_a.
 %
@@ -12,7 +12,7 @@ function [action, opt_action] = chooseaction(Q, state_x, state_y, ...
 % probability.
 
 % Get the optimal action
-Q_values=Q(state_x,state_y,:);
+Q_values=Q(state_y,state_x,:);
 [~, index_opt]=max(Q_values);
 opt_action=actions(index_opt);
 
