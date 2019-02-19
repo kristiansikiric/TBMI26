@@ -113,6 +113,16 @@ for w = 1 : size(params,2)
 end
 class = sign(res);
 
+res = zeros(length(xTrain),1);
+for w = 1 : size(params,2)
+    feat = params(1,w);
+    WC = WeakClassifier(params(2,w),params(3,w),xTrain(feat,:)');
+    tot = WC*params(4,w);
+    res = res + tot;
+    accTr(w) = 1-sum(sign(res)' ~= yTrain)/length(yTrain);
+end
+classTr = sign(res);
+
 
 %% Plot the error of the strong classifier as a function of the number of weak classifiers.
 %  Note: you can find this error without re-training with a different
@@ -123,12 +133,46 @@ class = sign(res);
 %     errors(i) = 1-(sum(class ~= yTest)/length(yTest));
 % end
 
-sum(class' ~= yTest)
+figure(4);
+1-sum(class' ~= yTest)/length(yTest)
 plot(1:nbrWeakClassifiers,acc);
+hold on;
+plot(1:nbrWeakClassifiers,accTr);
+legend("Test","Train")
 %% Plot some of the misclassified faces and non-faces from the test set
 %  Use the subplot command to make nice figures with multiple images.
 
+classDiff = class'-yTest;
+classDiff = find(classDiff);
+figure(5)
 
+colormap gray;
+subplot(231)
+imagesc(testImages(:,:,210))
+subplot(232)
+imagesc(testImages(:,:,4568))
+subplot(233)
+imagesc(testImages(:,:,2902))
+subplot(234)
+imagesc(testImages(:,:,7448))
+subplot(235)
+imagesc(testImages(:,:,11199))
+subplot(236)
+imagesc(testImages(:,:,12151))
 
 %% Plot your choosen Haar-features
 %  Use the subplot command to make nice figures with multiple images.
+figure(6);
+colormap gray;
+subplot(231)
+imagesc(haarFeatureMasks(:,:,1))
+subplot(232)
+imagesc(haarFeatureMasks(:,:,10))
+subplot(233)
+imagesc(haarFeatureMasks(:,:,20))
+subplot(234)
+imagesc(haarFeatureMasks(:,:,30))
+subplot(235)
+imagesc(haarFeatureMasks(:,:,40))
+subplot(236)
+imagesc(haarFeatureMasks(:,:,50))
