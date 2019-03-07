@@ -3,17 +3,17 @@
 
 global GWTERM;
 [row, col, ~] = find(GWTERM == 1);
-MAP = 2;
+MAP = 3;
 gwinit(MAP);
 state = gwstate;
-Q = abs(randn(state.ysize,state.xsize,4));
+Q = rand(state.ysize,state.xsize,4);
 gamma = 0.9;
 lr = 0.3;
 epsilon = 0.9;
 
 %% Training loop
 %  Train the agent using the Q-learning algorithm.
-Episodes = 10000;
+Episodes = 1000;
 for i = 1:Episodes
 gwinit(MAP);
 state = gwstate;
