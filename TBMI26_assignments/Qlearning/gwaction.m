@@ -1,4 +1,4 @@
-function s = gwaction(action)
+function [s, action] = gwaction(action)
 % state = GWACTION(action)
 % Let the robot perform an action and then return the resulting robot state.
 %  

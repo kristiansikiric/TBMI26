@@ -58,7 +58,7 @@ end
 
 % If you want to make the robot move slower (to make it easier to
 % understand what it does) you can uncomment this line.
-%pause(0.1);
+pause(0.1);
 
 drawnow;
 end
